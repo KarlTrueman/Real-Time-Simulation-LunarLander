@@ -35,7 +35,7 @@ void Rotate(float& posX, float& posY, float AposX, float AposY, float Angle)
 	posY = FPosY;
 }
 
-void DrawLine(BYTE* screen, int screenwidth, int screenheight, int startX, int startY, int endX, int endY)
+void DrawLine(BYTE* screen, int screenwidth, int screenheight, int startX, int startY, int endX, int endY, int Red = 0, int Green = 255, int Blue = 0)
 {
 	int lengthX = endX - startX;
 	int lengthY = endY - startY;
@@ -52,9 +52,9 @@ void DrawLine(BYTE* screen, int screenwidth, int screenheight, int startX, int s
 		int drawY = calcY;
 		if (drawX > 0 && drawX < screenwidth && drawY > 0 && drawY < screenheight)
 		{
-			screen[drawY * screenwidth * 4 + drawX * 4] = 0; //Red
-			screen[drawY * screenwidth * 4 + drawX * 4 + 1] = 255; //Green
-			screen[drawY * screenwidth * 4 + drawX * 4 + 2] = 0; //Blue
+			screen[drawY * screenwidth * 4 + drawX * 4] = Red; //Red
+			screen[drawY * screenwidth * 4 + drawX * 4 + 1] = Green; //Green
+			screen[drawY * screenwidth * 4 + drawX * 4 + 2] = Blue; //Blue
 		}
 
 	}
@@ -62,14 +62,16 @@ void DrawLine(BYTE* screen, int screenwidth, int screenheight, int startX, int s
 
 void HAPI_Main()
 {
-	int width{ 1920 };
-	int height{ 1080 };
+	int width{ 1280 };
+	int height{ 720 };
 
 	if (!HAPI.Initialise(width, height))
 		return;
 	HAPI.SetShowFPS(true);
 	BYTE* screen = HAPI.GetScreenPointer();
 
+
+	float Gravity = 0.001;
 	//LAnder Position
 	float posx = 200;
 	float posy = 200;
@@ -121,13 +123,32 @@ void HAPI_Main()
 		ThrustY = posy - TopY;
 		ThrustX = posx - TopX;
 
-		DrawLine(screen, width, height, LeftX, LeftY, RightX, RightY );
-		DrawLine(screen, width, height, LeftX, LeftY, TopX, TopY);
-		DrawLine(screen, width, height, RightX, RightY, TopX, TopY);
+		//Draw Lander
+		DrawLine(screen, width, height, LeftX, LeftY, RightX, RightY, 0, 0, 255);
+		DrawLine(screen, width, height, LeftX, LeftY, TopX, TopY, 0, 0, 255);
+		DrawLine(screen, width, height, RightX, RightY, TopX, TopY, 0, 0, 255);
+
+		//Collision with bottom of screen
+		if (posy > 700)
+		{
+			Angle = 0;
+			Vy = 0;
+			Vx = 0;
+			Gravity = 0;
+		}
+
 		//Velocity
-		Vy += 0.001;
+		Vy += Gravity;
 		posx += Vx;
 		posy += Vy;
+
+		//Screen Borders
+		//bottom
+		DrawLine(screen, width, height, 0, 719, 1280, 719);
+		//Left
+		DrawLine(screen, width, height, 1, 0, 1, 720);
+		//Right
+		DrawLine(screen, width, height, 1279, 0, 1279, 720);
 
 	}
 }
