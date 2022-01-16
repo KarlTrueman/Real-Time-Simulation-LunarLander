@@ -55,8 +55,13 @@ void DrawLine(BYTE* screen, int screenwidth, int screenheight, int startX, int s
 
 }
 
-void Simulation::TriggerParticles()
+void Simulation::Crash()
 {
+	If_Landed = true;
+	Vy = 0;
+	Vx = 0;
+	Gravity = 0;
+	Crashed = true;
 	for (int z = 0; z < ParticlesVec.size(); z++)
 	{
 		ParticlesVec[z]->Setup(posx, posy);
@@ -172,56 +177,37 @@ void Simulation::Run()
 		{
 			if (Vy <= 0.4)
 			{
-				If_Landed = true;
-				Vy = 0;
-				Vx = 0;
-				Gravity = 0;
-				Crashed = false;
-				//Angle = 0;
-				//TriggerParticles();
+				if (Angle > -0.2 && Angle < 0.2)
+				{
+					If_Landed = true;
+					Vy = 0;
+					Vx = 0;
+					Gravity = 0;
+					Crashed = false;
+				}
+				else
+				{
+					Crash();
+				}
 			}
 			else
 			{
-				If_Landed = true;
-				Vy = 0;
-				Vx = 0;
-				Gravity = 0;
-				Crashed = true;
-				//Angle = 0;
-				TriggerParticles();
+				Crash();
 			}
 		}
 		else if (posy > 700 && If_Landed == false)
 		{
-			If_Landed = true;
-			Vy = 0;
-			Vx = 0;
-			Gravity = 0;
-			Crashed = true;
-			//Angle = 0;
-			TriggerParticles();
+			Crash();
 		}
 		//Left wall colision
 		if (posx <= 10)
 		{
-			If_Landed = true;
-			Vy = 0;
-			Vx = 0;
-			Gravity = 0;
-			Crashed = true;
-			//Angle = 0;
-			TriggerParticles();
+			Crash();
 		}
 		//Right wall colison
 		else if (posx >= 1270)
 		{
-			If_Landed = true;
-			Vy = 0;
-			Vx = 0;
-			Gravity = 0;
-			Crashed = true;
-			//Angle = 0;
-			TriggerParticles();
+			Crash();
 		}
 
 		//Update all entitys

@@ -19,7 +19,7 @@ private:
 	float Time = 0;
 	float OldTime = 0;
 	float DeltaTime = 0;
-	void TriggerParticles();
+	void Crash();
 
 	bool Crashed = false;
 	bool If_Landed = false;
