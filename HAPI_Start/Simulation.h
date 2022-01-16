@@ -1,11 +1,13 @@
 #pragma once
 #include <HAPI_lib.h>
 #include<vector>
+
 using namespace HAPISPACE;
 class Particles;
 class Simulation
 {
 public:
+	~Simulation();
 	void Run();
 	float GetDeltaTime() { return DeltaTime; }
 	float GetPosX() { return posx; }
@@ -33,6 +35,10 @@ private:
 	//Lander Thrust
 	float ThrustX = 0;
 	float ThrustY = 0;
+	//text
+	int TextSize = 15;
+	int UIX = 10;
+	int UIY = 0;
 	
 
 };

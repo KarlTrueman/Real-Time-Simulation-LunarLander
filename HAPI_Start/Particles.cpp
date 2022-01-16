@@ -40,7 +40,7 @@ void Particles::Update(BYTE* screen, int screenwidth, int screenheight)
 				screen[PosY * screenwidth * 4 + PosX * 4] = Red; //Red
 				screen[PosY * screenwidth * 4 + PosX * 4 + 1] = Green; //Green
 				screen[PosY * screenwidth * 4 + PosX * 4 + 2] = Blue; //Blue
-				LifeSpan -= 1;
+				//LifeSpan -= 1;
 			}
 		}
 	}

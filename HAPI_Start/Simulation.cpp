@@ -1,10 +1,5 @@
 #include "Simulation.h"
-//#include <HAPI_lib.h>
-#include<time.h>
-#include<vector>
-#include "particles.h";
-
-//using namespace HAPISPACE;
+#include "Particles.h"
 
 void Rotate(float& posX, float& posY, float AposX, float AposY, float Angle)
 {
@@ -69,34 +64,34 @@ void Simulation::TriggerParticles()
 	}
 }
 
+Simulation::~Simulation()
+{
+	for (auto& p : ParticlesVec)
+		delete p;
+}
+
 void Simulation::Run()
 {
-	//Particles
+	//LandingZone
+	float LandingX = ((rand() % 1000));
 
-	float TotalParticles = 2000;
+	//Particles
+	float TotalParticles = 500;
 	for (int x = 0; x <= TotalParticles; x++)
 	{
 		Particles* newParticle = new Particles();
 		ParticlesVec.push_back(newParticle);
 	}
 
-
-	HAPI_TColour textcol{ HAPI_TColour::RED };
-	HAPI_TColour outcol{ HAPI_TColour::RED };
-
-
+	//HAPI Initalisation
 	int width{ 1280 };
 	int height{ 720 };
-
 	if (!HAPI.Initialise(width, height))
 		return;
 	HAPI.SetShowFPS(true);
 	BYTE* screen = HAPI.GetScreenPointer();
-
-	
-
-
-	//Initilise Keyboard Input
+	HAPI_TColour textcol{ HAPI_TColour::RED };
+	HAPI_TColour outcol{ HAPI_TColour::RED };
 	const HAPI_TKeyboardData& KeyData = HAPI.GetKeyboardData();
 
 	while (HAPI.Update())
@@ -106,15 +101,16 @@ void Simulation::Run()
 		DeltaTime = Time - OldTime;
 		OldTime = Time;
 
-
 		//Clear Screen
 		memset(screen, 0, (size_t)width * height * 4);
+
 		//UI
-		HAPI.RenderText(25, 50, textcol, outcol, 1, "Velocity Y: " + std::to_string(Vy), 32);
-		HAPI.RenderText(25, 82, textcol, outcol, 1, "Velocity X: " + std::to_string(Vx), 32);
-		HAPI.RenderText(25, 112, textcol, outcol, 1, "PosX: " + std::to_string(posx), 32);
-		HAPI.RenderText(25, 144, textcol, outcol, 1, "PosY: " + std::to_string(posy), 32);
-		HAPI.RenderText(25, 176, textcol, outcol, 1, "Angle: " + std::to_string(Angle), 32);
+		HAPI.RenderText(UIX, UIY + (TextSize * 1), textcol, outcol, 0.1, "Velocity Y: " + std::to_string(Vy), 15);
+		HAPI.RenderText(UIX, UIY + (TextSize * 2), textcol, outcol, 0.1, "Velocity X: " + std::to_string(Vx), 15);
+		HAPI.RenderText(UIX, UIY + (TextSize * 3), textcol, outcol, 0.1, "PosX: " + std::to_string(posx), 15);
+		HAPI.RenderText(UIX, UIY + (TextSize * 4), textcol, outcol, 0.1, "PosY: " + std::to_string(posy), 15);
+		HAPI.RenderText(UIX, UIY + (TextSize * 5), textcol, outcol, 0.1, "Angle: " + std::to_string(Angle), 15);
+
 		//Draw Triangle(Lander)
 		float TopX = posx;
 		float TopY = posy - 20;
@@ -150,6 +146,7 @@ void Simulation::Run()
 			If_Landed = false;
 			Crashed = false;
 			Angle = 0;
+			LandingX = ((rand() % 1000));
 			for (int z = 0; z < ParticlesVec.size(); z++)
 			{;
 				ParticlesVec[z]->SetIsAlive(false);
@@ -170,20 +167,10 @@ void Simulation::Run()
 		DrawLine(screen, width, height, LeftX, LeftY, TopX, TopY, 0, 0, 255);
 		DrawLine(screen, width, height, RightX, RightY, TopX, TopY, 0, 0, 255);
 
-		//Collision with bottom of screen
-		if (posy > 700 && Vy > 0.4 && If_Landed == false)
+		// Bottom collision
+		if (posy > 700 && posx - 20 > LandingX && posx + 20 < LandingX + 100 && If_Landed == false)
 		{
-			If_Landed = true;
-			Vy = 0;
-			Vx = 0;
-			Gravity = 0;
-			Crashed = true;
-			//Angle = 0;
-			TriggerParticles();
-		}
-		else if (posy > 700 && Vy < 0.4 && If_Landed == false)
-		{
-			if (Angle > -0.2 && Angle < 0.2)
+			if (Vy <= 0.4)
 			{
 				If_Landed = true;
 				Vy = 0;
@@ -191,6 +178,7 @@ void Simulation::Run()
 				Gravity = 0;
 				Crashed = false;
 				//Angle = 0;
+				//TriggerParticles();
 			}
 			else
 			{
@@ -202,8 +190,18 @@ void Simulation::Run()
 				//Angle = 0;
 				TriggerParticles();
 			}
-
 		}
+		else if (posy > 700 && If_Landed == false)
+		{
+			If_Landed = true;
+			Vy = 0;
+			Vx = 0;
+			Gravity = 0;
+			Crashed = true;
+			//Angle = 0;
+			TriggerParticles();
+		}
+		//Left wall colision
 		if (posx <= 10)
 		{
 			If_Landed = true;
@@ -214,6 +212,7 @@ void Simulation::Run()
 			//Angle = 0;
 			TriggerParticles();
 		}
+		//Right wall colison
 		else if (posx >= 1270)
 		{
 			If_Landed = true;
@@ -224,20 +223,20 @@ void Simulation::Run()
 			//Angle = 0;
 			TriggerParticles();
 		}
+
 		//Update all entitys
 		for (Particles* p : ParticlesVec)
 			p->Update(screen, width, height);
 
-
-		if (Crashed == true)
+		//EndGame UI
+		if (If_Landed == true && Crashed == true)
 		{
 			HAPI.RenderText(500, 300, textcol, outcol, 1, "You Crashed!", 64);
 		}
-		else if (If_Landed && Crashed == false)
+		else if (If_Landed == true && Crashed == false)
 		{
 			HAPI.RenderText(500, 300, textcol, outcol, 1, "You Landed Succesfully!", 64);
 		}
-
 
 		//Velocity
 		Vy += Gravity;
@@ -251,6 +250,9 @@ void Simulation::Run()
 		DrawLine(screen, width, height, 1, 0, 1, 720);
 		//Right
 		DrawLine(screen, width, height, 1279, 0, 1279, 720);
+		//LandindPAd
+		DrawLine(screen, width, height, LandingX, 719, LandingX + 100, 719, 255, 0, 0);
+		DrawLine(screen, width, height, LandingX, 718, LandingX + 100, 718, 255, 0, 0);
 
 	}
 	
