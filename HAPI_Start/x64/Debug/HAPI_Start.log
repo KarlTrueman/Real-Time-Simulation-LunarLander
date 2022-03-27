@@ -1,0 +1,25 @@
+﻿  Simulation.cpp
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.h(24,16): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(41,13): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(42,14): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(43,14): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(50,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(51,13): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(105,15): warning C4244: '=': conversion from 'clock_t' to 'float', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(131,19): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(135,19): warning C4305: '+=': truncation from 'double' to 'float'
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(149,19): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(169,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(169,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(169,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(169,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(170,55): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(170,49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(170,42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(170,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(171,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(171,51): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(171,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\HAPI_Start\Simulation.cpp(171,35): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  HAPI_Start.vcxproj -> C:\Users\karlt\Desktop\Github\Uni\Year 2\Real Time Simulation\LunarLander\x64\Debug\HAPI_Start.exe

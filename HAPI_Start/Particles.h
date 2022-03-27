@@ -19,9 +19,11 @@ private:
 	float Vy = 0;
 	float Speed = 0;
 	float Direction = 0;
-	float LifeSpan = 9;
+	float LifeSpan = 100;
 	int Red = rand() % 255;
 	int Green = rand() % 255;
 	int Blue = rand() % 255;
+	void DrawLine(BYTE* screen, int screenwidth, int screenheight, int startX, int startY, int endX, int endY, int Red = 0, int Green = 255, int Blue = 0);
+	void Rotate(float& posX, float& posY, float AposX, float AposY, float Angle);
 };
 
